@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.mainContainer img {
+  max-width: 80%;
+}
+
+.searchBar {
+  min-height: 2em;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBar #search {
+  max-width: 3000px;
+  font-size: 20px;
+  border-radius: 10px 0 0 10px;
+  border-color: #ffffff;
+  box-shadow: #000000;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.searchBar button {
+  color: #ffffff;
+  background-color: #12a9a9;
+  padding: 10px;
+  border-radius: 0 10px 10px 0;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px #888888;
+  cursor: pointer;
+}
+
+/* Login pArt */
+
+.login {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+}
+
+.login button {
+  color: black;
+  border: 1px solid #000000;
+  box-shadow: 5px 5px 5px #888888;
+  background-color: #12a9a9;
+  font-weight: bold;
+}
+
+.inputContainer {
+  display: flex;
+  flex-flow: wrap column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000;
+  border: 2px solid #000;
+  box-shadow: 24px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 5px #ffffff;
+}
+
+.inputContainer input {
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-weight: bold;
+  max-width: 200px;
+  margin: 5px;
+}
+
+.inputContainer #submit {
+  background-color: #12a9a9;
+  color: #ffffff;
+  animation: ease-in;
+  animation-duration: 3s;
+  border-radius: 10px;
+  max-height: 30px;
+  cursor: pointer;
+}
+.inputContainer #submit:hover {
+  background-color: #65a404;
+}
+
+/* SEARCH RESULT */
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.searchProductContainer {
+  margin-top: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  min-width: 80%;
+}
+
+.searchProductContainer td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.searchProductContainer tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.searchProductContainer tr:hover {
+  background-color: #ddd;
+}
+
+.searchProductContainer th {
+  padding: 12px 0;
+  text-align: center;
+  background-color: #04aa6d;
+  color: white;
+}
+
+.linkIcons {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  list-style: none;
+  left: 10px;
+  top: 100px;
+}
+
+.linkIcons img {
+  max-width: 50px;
+  flex-direction: column;
+  cursor: pointer;
+  transition-duration: 2s;
+  transition-property: border;
+}
+
+.linkIcons img:hover {
+  border: 1px solid black;
+  border-radius: 50%;
+}
