@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "start",
+    "start": "vite",
+    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "NPM_CONFIG_PRODUCTION":"false"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
