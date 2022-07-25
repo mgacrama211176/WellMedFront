@@ -17,8 +17,8 @@ import facebook from '../assets/icons/facebook.png';
 import map from '../assets/icons/map.png';
 
 const Home = () => {
-  const url = 'http://localhost:4000/login';
-  const searchURL = 'http://localhost:4000/search/';
+  const url = 'https://wellmed.herokuapp.com/login';
+  const searchURL = 'https://wellmed.herokuapp.com/search/';
   const nav = useNavigate();
 
   //States

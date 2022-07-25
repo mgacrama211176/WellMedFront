@@ -22,7 +22,7 @@ const Optionbutton = styled.button`
 `;
 
 const Delete = ({ deleteProduct, setOpen, open, StepCounter }) => {
-  const deleteURL = 'http://localhost:4000/product/delete/';
+  const deleteURL = 'https://wellmed.herokuapp.com/product/delete/';
   const deletenotify = () => {
     toast.success(`Product Deleted`, {
       position: 'top-right',

@@ -23,7 +23,7 @@ const add = () => {
       color: black;
     }
   `;
-  const productUrl = 'http://localhost:4000/product/add';
+  const productUrl = 'https://wellmed.herokuapp.com/product/add';
 
   const [products, SetProducts] = useState({
     ProductName: '',

@@ -20,9 +20,9 @@ let StepCounter = 0;
 
 const Update = () => {
   const steps = ['Search Product', 'Select Product', 'Make Changes'];
-  const productUrl = 'http://localhost:4000/search/';
-  const productURL = 'http://localhost:4000/product/';
-  const updateProductURL = 'http://localhost:4000/product/update/';
+  const productUrl = 'https://wellmed.herokuapp.com/search/';
+  const productURL = 'https://wellmed.herokuapp.com/product/';
+  const updateProductURL = 'https://wellmed.herokuapp.com/product/update/';
 
   const [selectedProduct, setSelectedProduct] = useState('');
   const [formHidden, setFormHidden] = useState({
