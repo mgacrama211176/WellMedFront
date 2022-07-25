@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/update.css';
 import axios from 'axios';
+import Delete from './Delete';
 
 //other components
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,20 +14,38 @@ import StepLabel from '@mui/material/StepLabel';
 //MUI components
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import styled from 'styled-components';
 
 let StepCounter = 0;
 
 const Update = () => {
   const steps = ['Search Product', 'Select Product', 'Make Changes'];
+  const productUrl = 'http://localhost:4000/search/';
+  const productURL = 'http://localhost:4000/product/';
+  const updateProductURL = 'http://localhost:4000/product/update/';
+
+  const [selectedProduct, setSelectedProduct] = useState('');
   const [formHidden, setFormHidden] = useState({
     tableContainer: 'block',
     UpdateFormContainer: 'none',
   });
+  const [searchID, setSearchID] = useState({ searchID: '' });
+  const [result, setResult] = useState([]);
+  const [selectedProductInformation, setSelectedProductInformation] = useState({
+    product: '',
+    brand: '',
+    unit: '',
+    price: '',
+  });
+  const [deleteProduct, setDeleteProduct] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const Updatenotify = () => {
     toast.success(`Updated: ${selectedProductInformation.product}`, {
       position: 'top-right',
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
@@ -34,19 +53,8 @@ const Update = () => {
       progress: undefined,
     });
   };
-  const deletenotify = () => {
-    toast.success(`Product Deleted`, {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+
   //SEARCHING FOR ID FUNCTIONS
-  const [searchID, setSearchID] = useState({ searchID: '' });
 
   const OnChangeSearchInput = (e) => {
     const newSearch = { ...searchID };
@@ -55,10 +63,7 @@ const Update = () => {
     StepCounter = 0;
   };
 
-  const [result, setResult] = useState([]);
-
   const OnclickSearch = async () => {
-    const productUrl = 'http://localhost:4000/search/';
     const SearchItem = productUrl + searchID.searchID;
     setFormHidden('none');
     try {
@@ -75,15 +80,6 @@ const Update = () => {
   };
 
   //when selected for UPDATE
-  const productURL = 'http://localhost:4000/product/';
-  const [selectedProduct, setSelectedProduct] = useState('');
-
-  const [selectedProductInformation, setSelectedProductInformation] = useState({
-    product: '',
-    brand: '',
-    unit: '',
-    price: '',
-  });
 
   const OnClickOnSelected = async () => {
     const combinedUpdateURL = `${productURL}${selectedProduct}`;
@@ -111,16 +107,12 @@ const Update = () => {
     }
   }, [selectedProduct]);
 
-  console.log(selectedProductInformation); /// heres where the data is kept
-
   const onChangeHandle = (e) => {
     const newProducts = { ...selectedProductInformation };
     newProducts[e.target.id] = e.target.value;
     setSelectedProductInformation(newProducts);
     console.log(newProducts);
   };
-
-  const updateProductURL = 'http://localhost:4000/product/update/';
 
   const onSubmitUpdate = async (e) => {
     const combinedUpdateURL = `${updateProductURL}${selectedProduct}`;
@@ -140,28 +132,6 @@ const Update = () => {
     }
   };
 
-  //For Deleting the Item
-  const deleteURL = 'http://localhost:4000/product/delete/';
-  const [deleteProduct, setDeleteProduct] = useState('');
-
-  const OnClickDelete = async (e) => {
-    const combinedUpdateURL = `${deleteURL}${deleteProduct}`;
-    console.log(combinedUpdateURL);
-    e.preventDefault();
-
-    try {
-      const deleteProductSelected = await axios.delete(combinedUpdateURL);
-      deletenotify();
-      OnclickSearch();
-      handleClose();
-    } catch (err) {
-      console.log(`No product selected for delete`);
-    }
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   return (
     <div>
       <ToastContainer
@@ -236,7 +206,7 @@ const Update = () => {
                   <td>
                     {/* //delete button */}
 
-                    <button
+                    {/* <button
                       onClick={() => {
                         setDeleteProduct(result._id);
                         StepCounter = 2;
@@ -244,7 +214,13 @@ const Update = () => {
                       }}
                     >
                       Delete
-                    </button>
+                    </button> */}
+                    <Delete
+                      deleteProduct={deleteProduct}
+                      setOpen={setOpen}
+                      open={open}
+                      StepCounter={StepCounter}
+                    />
                   </td>
                 </tr>
               ))}
@@ -253,7 +229,7 @@ const Update = () => {
           {/* <h1>NO PRODUCT FOUND</h1> */}
         </div>
 
-        {/* Delete Confirmation Modal */}
+        {/* Delete Confirmation Modal
         <Modal
           open={open}
           onClose={handleClose}
@@ -262,21 +238,22 @@ const Update = () => {
         >
           <form>
             <h1>Are you sure you want to delete this item?</h1>
-
-            <button type="submit" onClick={OnClickDelete}>
-              Yes
-            </button>
-            <button
-              type="submit"
-              onClick={() => {
-                handleClose();
-                StepCounter = 1;
-              }}
-            >
-              No
-            </button>
+            <Option>
+              <Optionbutton type="submit" onClick={OnClickDelete}>
+                Yes
+              </Optionbutton>
+              <Optionbutton
+                type="submit"
+                onClick={() => {
+                  handleClose();
+                  StepCounter = 1;
+                }}
+              >
+                No
+              </Optionbutton>
+            </Option>
           </form>
-        </Modal>
+        </Modal> */}
 
         {/* //FORM CONTAINER AFTER ONCLICK UPDATE */}
         <div
