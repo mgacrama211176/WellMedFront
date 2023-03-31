@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/update.css';
-import axios from 'axios';
-import Delete from './Delete';
+import React, { useState, useEffect } from "react";
+import "../styles/update.css";
+import axios from "axios";
+import Delete from "./Delete";
 
 //other components
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
 //MUI components
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import styled from 'styled-components';
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import styled from "styled-components";
 
 let StepCounter = 0;
 
 const Update = () => {
-  const steps = ['Search Product', 'Select Product', 'Make Changes'];
-  const productUrl = 'https://wellmed.herokuapp.com/search/';
-  const productURL = 'https://wellmed.herokuapp.com/product/';
-  const updateProductURL = 'https://wellmed.herokuapp.com/product/update/';
+  const steps = ["Search Product", "Select Product", "Make Changes"];
+  const productUrl = "https://wellmed.onrender.com/search/";
+  const productURL = "https://wellmed.onrender.com/product/";
+  const updateProductURL = "https://wellmed.onrender.com/product/update/";
 
-  const [selectedProduct, setSelectedProduct] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState("");
   const [formHidden, setFormHidden] = useState({
-    tableContainer: 'block',
-    UpdateFormContainer: 'none',
+    tableContainer: "block",
+    UpdateFormContainer: "none",
   });
-  const [searchID, setSearchID] = useState({ searchID: '' });
+  const [searchID, setSearchID] = useState({ searchID: "" });
   const [result, setResult] = useState([]);
   const [selectedProductInformation, setSelectedProductInformation] = useState({
-    product: '',
-    brand: '',
-    unit: '',
-    price: '',
+    product: "",
+    brand: "",
+    unit: "",
+    price: "",
   });
-  const [deleteProduct, setDeleteProduct] = useState('');
+  const [deleteProduct, setDeleteProduct] = useState("");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const Updatenotify = () => {
     toast.success(`Updated: ${selectedProductInformation.product}`, {
-      position: 'top-right',
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -65,14 +65,14 @@ const Update = () => {
 
   const OnclickSearch = async () => {
     const SearchItem = productUrl + searchID.searchID;
-    setFormHidden('none');
+    setFormHidden("none");
     try {
       const result = await axios.get(SearchItem);
       setResult(result.data.message);
       StepCounter = 1;
       setFormHidden({
-        tableContainer: 'block',
-        UpdateFormContainer: 'none',
+        tableContainer: "block",
+        UpdateFormContainer: "none",
       });
     } catch (err) {
       console.log(err);
@@ -101,7 +101,7 @@ const Update = () => {
   };
 
   useEffect(() => {
-    if (selectedProduct === '') {
+    if (selectedProduct === "") {
     } else {
       OnClickOnSelected();
     }
@@ -147,7 +147,7 @@ const Update = () => {
       />
       <div className="optionContainer">
         <h1>Search Item to Update or Delete</h1>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <Stepper activeStep={StepCounter} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
@@ -195,8 +195,8 @@ const Update = () => {
                       onClick={function () {
                         setSelectedProduct(result._id);
                         setFormHidden({
-                          tableContainer: 'none',
-                          UpdateFormContainer: 'block',
+                          tableContainer: "none",
+                          UpdateFormContainer: "block",
                         });
                       }}
                     >

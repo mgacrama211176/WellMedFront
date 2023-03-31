@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Modal from '@mui/material/Modal';
+import React from "react";
+import styled from "styled-components";
+import Modal from "@mui/material/Modal";
 
 const Container = styled.div``;
 const Button = styled.button`
@@ -22,10 +22,10 @@ const Optionbutton = styled.button`
 `;
 
 const Delete = ({ deleteProduct, setOpen, open, StepCounter }) => {
-  const deleteURL = 'https://wellmed.herokuapp.com/product/delete/';
+  const deleteURL = "https://wellmed.onrender.com/product/delete/";
   const deletenotify = () => {
     toast.success(`Product Deleted`, {
-      position: 'top-right',
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import '../styles/console.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import "../styles/console.css";
+import axios from "axios";
 
 //other components
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const add = () => {
   const ButtonOnClick = styled.button`
@@ -23,18 +23,18 @@ const add = () => {
       color: black;
     }
   `;
-  const productUrl = 'https://wellmed.herokuapp.com/product/add';
+  const productUrl = "https://wellmed.onrender.com/product/add";
 
   const [products, SetProducts] = useState({
-    ProductName: '',
-    BrandName: '',
-    Unit: '',
-    Price: '',
+    ProductName: "",
+    BrandName: "",
+    Unit: "",
+    Price: "",
   });
 
   const notify = () => {
     toast.success(`Added: ${products.ProductName}`, {
-      position: 'top-right',
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -62,10 +62,10 @@ const add = () => {
     });
 
     SetProducts({
-      ProductName: '',
-      BrandName: '',
-      Unit: '',
-      Price: '',
+      ProductName: "",
+      BrandName: "",
+      Unit: "",
+      Price: "",
     });
   };
 

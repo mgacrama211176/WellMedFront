@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo.jpg';
-import '../styles/home.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Logo from "../assets/logo.jpg";
+import "../styles/home.css";
 
 //MUI components
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 
 //Toast components
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //icons
-import facebook from '../assets/icons/facebook.png';
-import map from '../assets/icons/map.png';
+import facebook from "../assets/icons/facebook.png";
+import map from "../assets/icons/map.png";
 
 const Home = () => {
-  const url = 'https://wellmed.herokuapp.com/login';
-  const searchURL = 'https://wellmed.herokuapp.com/search/';
+  const url = "https://wellmed.onrender.com/login";
+  const searchURL = "https://wellmed.onrender.com/search/";
   const nav = useNavigate();
 
   //States
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState({ search: '' });
+  const [search, setSearch] = useState({ search: "" });
   const [login, setLogin] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const [resultProducts, setResultProducts] = useState([]);
@@ -35,8 +35,8 @@ const Home = () => {
   const handleClose = () => setOpen(false);
 
   const notify = () =>
-    toast.error('Incorrect Username or Password', {
-      position: 'top-right',
+    toast.error("Incorrect Username or Password", {
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -66,11 +66,11 @@ const Home = () => {
 
       .then((response) => {
         console.log(response);
-        sessionStorage.setItem('admin', JSON.stringify(login.username));
-        nav('/console');
+        sessionStorage.setItem("admin", JSON.stringify(login.username));
+        nav("/console");
       })
       .catch((err) => {
-        setLogin({ username: '', password: '' });
+        setLogin({ username: "", password: "" });
         notify();
       });
   };
