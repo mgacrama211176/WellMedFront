@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import Logo from '../assets/logo.jpg';
-import '../styles/add.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import Logo from "../assets/logo.jpg";
+import "../styles/add.css";
+import { useNavigate } from "react-router-dom";
 
 //components
-import AddItems from '../component/add';
-import Update from '../component/Update';
+import AddClient from "../component/ClientInformation/AddClient";
+import Inventory from "../component/Inventory/Inventory";
 
 const Console = () => {
+  const options = [
+    "Client Information",
+    "Inventory",
+    "Job Card Generator",
+    "Accounting",
+    "Suppliers",
+    "Cars",
+  ];
+
+  const [option, setOption] = useState("Client Information");
+
   const [formHidden, setFormHidden] = useState({
-    addItems: 'none',
-    updateDelete: 'none',
+    addItems: "none",
+    updateDelete: "none",
   });
 
-  const getSessionUser = sessionStorage.getItem('admin');
+  const getSessionUser = sessionStorage.getItem("admin");
   const nav = useNavigate();
 
   const Logout = () => {
-    sessionStorage.removeItem('admin');
-    nav('/');
+    sessionStorage.removeItem("admin");
+    nav("/");
   };
 
   useEffect(() => {
@@ -31,53 +42,36 @@ const Console = () => {
   const Protected = () => {
     if (getSessionUser) {
     } else {
-      nav('/');
+      nav("/");
     }
   };
 
   return (
-    <div>
-      <div className="consoleContainer">
+    <div className="flex w-screen">
+      <div className="consoleContainer z-0">
         <div className="imgContainer">
           <img src={Logo} alt="logo" />
         </div>
         <div className="links">
           <ul>
-            <li
-              onClick={function () {
-                setFormHidden({
-                  addItems: 'block',
-                  updateDelete: 'none',
-                });
-              }}
-            >
-              Add Items
-            </li>
-            <li
-              onClick={function () {
-                setFormHidden({
-                  addItems: 'none',
-                  updateDelete: 'block',
-                });
-              }}
-            >
-              Update and Delete Items
-            </li>
+            {options.map((option) => (
+              <li onClick={() => setOption(option)} key={option}>
+                {option}
+              </li>
+            ))}
             <button onClick={Logout}>LOGOUT</button>
           </ul>
         </div>
       </div>
       {/* COMPONENTS */}
       <div className="displayOptions">
-        <div className="add" style={{ display: ` ${formHidden.addItems}` }}>
-          <AddItems />
-        </div>
-        <div
-          className="update"
-          style={{ display: ` ${formHidden.updateDelete}` }}
-        >
-          <Update />
-        </div>
+        {option === "Client Information" ? (
+          <AddClient />
+        ) : option === "Inventory" ? (
+          <Inventory />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
