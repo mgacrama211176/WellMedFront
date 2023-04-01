@@ -16,7 +16,7 @@ export default function ClientTable() {
   const [clients, setClients] = useState([]);
   useEffect(() => {
     const data = async () => {
-      const info = await axios.get("http://localhost:4000/api/clients");
+      const info = await axios.get("https://wellmed.onrender.com/api/clients");
       setClients(info.data);
       console.log(info.data);
     };

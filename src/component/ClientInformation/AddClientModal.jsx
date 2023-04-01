@@ -43,7 +43,7 @@ export default function BasicModal() {
 
   const handleSubmit = async () => {
     const data = await axios.post(
-      "http://localhost:4000/api/clients",
+      "https://wellmed.onrender.com/api/clients",
       information
     );
     console.log(data);
