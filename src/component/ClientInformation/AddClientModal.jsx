@@ -11,26 +11,57 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import axios from "axios";
 
 export default function BasicModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [modalSelection, setModalSelection] = useState("");
-  console.log(modalSelection);
-
   const functionalities = ["Add Client", "Delete", "Update"];
+
+  // customerInformation Container
+  const [information, setInformation] = useState({
+    client_type: "Individual",
+    client_name: "",
+    client_address: "",
+    client_phoneNumber: 0,
+    car_model: "",
+    car_make: "",
+    car_year: "",
+    car_chassisNumber: "",
+    car_engineNumber: "",
+    car_plateNumber: "",
+  });
+
+  const handleChangeInput = (e) => {
+    const newClient = { ...information };
+    newClient[e.target.name] = e.target.value;
+    console.log(newClient);
+    setInformation(newClient);
+  };
+
+  const handleSubmit = async () => {
+    const data = await axios.post(
+      "http://localhost:4000/api/clients",
+      information
+    );
+    console.log(data);
+    handleClose();
+    setInformation({
+      client_type: "Individual",
+      client_name: "",
+      client_address: "",
+      client_phoneNumber: 0,
+      car_model: "",
+      car_make: "",
+      car_year: "",
+      car_chassisNumber: "",
+      car_engineNumber: "",
+      car_plateNumber: "",
+    });
+  };
+
   return (
     <div>
       <div>
@@ -58,40 +89,86 @@ export default function BasicModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h5" component="h2">
                 Add Client
               </Typography>
               <Box className="flex flex-col gap-5">
                 <div>
-                  <Select className="w-40 text-black" defaultValue="Individual">
+                  <Select
+                    className="w-40 text-black"
+                    defaultValue="Individual"
+                    onChange={(e) => handleChangeInput(e)}
+                    name="client_type"
+                    id="client_type"
+                  >
                     <MenuItem value="Individual">Individual</MenuItem>
                     <MenuItem value="Company">Company</MenuItem>
                   </Select>
                   <FormHelperText>Client type</FormHelperText>
                 </div>
-                <TextField label="Customer Name" id="customer_name" required />
+                <TextField
+                  label="Customer Name"
+                  name="client_name"
+                  onChange={(e) => handleChangeInput(e)}
+                  required
+                />
                 <TextField
                   label="Customer Address"
-                  id="customer_address"
+                  name="client_address"
+                  onChange={(e) => handleChangeInput(e)}
                   required
                 />
                 <TextField
                   label="Customer Contact Number"
-                  id="customer_Cnumber"
+                  name="client_phoneNumber"
+                  onChange={(e) => handleChangeInput(e)}
+                  type="number"
                 />
-                <Typography id="modal-modal-title" variant="h5" component="h2">
+                <Typography variant="h5" component="h2">
                   Car Information
                 </Typography>
-                <div className="flex flex-row flex-wrap gap-2 justify-center">
-                  <TextField label="Car Model" id="customer_Cnumber" />
-                  <TextField label="Car Make" id="customer_Cnumber" />
-                  <TextField label="Car Year" id="customer_Cnumber" />
-                  <TextField label="Engine Number" id="customer_Cnumber" />
-                  <TextField label="Chassis Number" id="customer_Cnumber" />
-                  <TextField label="Plate Number" id="customer_Cnumber" />
+                <div className="flex flex-row flex-wrap gap-2 justify-center ">
+                  <TextField
+                    label="Car Model"
+                    name="car_model"
+                    onChange={(e) => handleChangeInput(e)}
+                  />
+                  <TextField
+                    label="Car Make"
+                    name="car_make"
+                    onChange={(e) => handleChangeInput(e)}
+                    type="number"
+                  />
+                  <TextField
+                    label="Car Year"
+                    name="car_year"
+                    type="number"
+                    onChange={(e) => handleChangeInput(e)}
+                  />
+                  <TextField
+                    label="Engine Number"
+                    name="car_engineNumber"
+                    onChange={(e) => handleChangeInput(e)}
+                  />
+                  <TextField
+                    label="Chassis Number"
+                    name="car_chassisNumber"
+                    onChange={(e) => handleChangeInput(e)}
+                  />
+                  <TextField
+                    label="Plate Number"
+                    name="car_plateNumber"
+                    onChange={(e) => handleChangeInput(e)}
+                  />
                 </div>
-                <Button variant="contained">Submit</Button>
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  type="submit"
+                >
+                  Submit
+                </Button>
               </Box>
             </Box>
           </Modal>
@@ -104,7 +181,7 @@ export default function BasicModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Delete Client
               </Typography>
@@ -122,7 +199,7 @@ export default function BasicModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Update Client
               </Typography>
