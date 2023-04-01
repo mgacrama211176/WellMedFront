@@ -11,19 +11,14 @@ import {
 
 import axios from "axios";
 import CarInformationModal from "./CarInformationModal";
+import useGetClient from "../../hooks/client/useGetClient";
 
 export default function ClientTable({ modalSelection }) {
-  const [clients, setClients] = useState([]);
-  useEffect(() => {
-    const data = async () => {
-      const info = await axios.get("https://wellmed.onrender.com/api/clients");
-      setClients(info.data);
-      console.log(info.data);
-    };
-    data();
-  }, [modalSelection]);
+  const { data: clients, isLoading } = useGetClient();
 
-  console.log(clients);
+  if (isLoading) {
+    return <p>Loading....</p>;
+  }
 
   return (
     <TableContainer component={Paper}>

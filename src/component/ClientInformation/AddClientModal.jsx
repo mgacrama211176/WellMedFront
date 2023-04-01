@@ -10,15 +10,18 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 //zustand
 import { useStore } from "zustand";
+import useAddClient from "../../hooks/client/useAddClient";
 
 export default function BasicModal({ modalSelection, setModalSelection }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const functionalities = ["Add Client", "Delete", "Update"];
+  const { mutate: addClient, isLoading } = useAddClient();
 
   // customerInformation Container
   const [information, setInformation] = useState({
@@ -37,16 +40,15 @@ export default function BasicModal({ modalSelection, setModalSelection }) {
   const handleChangeInput = (e) => {
     const newClient = { ...information };
     newClient[e.target.name] = e.target.value;
-    console.log(newClient);
     setInformation(newClient);
   };
 
   const handleSubmit = async () => {
-    const data = await axios.post(
-      "https://wellmed.onrender.com/api/clients",
-      information
-    );
-    console.log(data);
+    // const data = await axios.post(
+    //   "https://wellmed.onrender.com/api/clients",
+    //   information
+    // );
+    addClient(information);
 
     handleClose();
     setInformation({
@@ -63,7 +65,7 @@ export default function BasicModal({ modalSelection, setModalSelection }) {
     });
   };
 
-  console.log()
+  console.log();
 
   return (
     <div>
@@ -165,13 +167,14 @@ export default function BasicModal({ modalSelection, setModalSelection }) {
                     onChange={(e) => handleChangeInput(e)}
                   />
                 </div>
-                <Button
+                <LoadingButton
                   variant="contained"
+                  loading={isLoading}
                   onClick={handleSubmit}
                   type="submit"
                 >
                   Submit
-                </Button>
+                </LoadingButton>
               </Box>
             </Box>
           </Modal>
