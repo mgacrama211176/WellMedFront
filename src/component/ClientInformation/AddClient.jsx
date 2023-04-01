@@ -12,6 +12,7 @@ import styled from "styled-components";
 
 const AddClient = () => {
   const productUrl = "https://wellmed.onrender.com/product/add";
+  const [modalSelection, setModalSelection] = useState("");
 
   const notify = () => {
     toast.success(`Added: ${products.ProductName}`, {
@@ -43,7 +44,10 @@ const AddClient = () => {
           Add Client Information
         </h1>
         <div className="flex justify-center items-center  flex-col">
-          <AddClientModal />
+          <AddClientModal
+            modalSelection={modalSelection}
+            setModalSelection={setModalSelection}
+          />
           <ClientTable />
         </div>
       </div>

@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import CarInformationModal from "./CarInformationModal";
 
-export default function ClientTable() {
+export default function ClientTable({ modalSelection }) {
   const [clients, setClients] = useState([]);
   useEffect(() => {
     const data = async () => {
@@ -21,7 +21,7 @@ export default function ClientTable() {
       console.log(info.data);
     };
     data();
-  }, []);
+  }, [modalSelection]);
 
   console.log(clients);
 

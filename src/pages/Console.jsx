@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 //components
 import AddClient from "../component/ClientInformation/AddClient";
 import Inventory from "../component/Inventory/Inventory";
+import Cars from "../component/Cars/Cars";
 
 const Console = () => {
   const options = [
@@ -69,6 +70,8 @@ const Console = () => {
           <AddClient />
         ) : option === "Inventory" ? (
           <Inventory />
+        ) : option === "Cars" ? (
+          <Cars />
         ) : (
           <></>
         )}

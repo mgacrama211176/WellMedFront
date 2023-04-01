@@ -10,14 +10,14 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
-
 import axios from "axios";
+//zustand
+import { useStore } from "zustand";
 
-export default function BasicModal() {
+export default function BasicModal({ modalSelection, setModalSelection }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [modalSelection, setModalSelection] = useState("");
   const functionalities = ["Add Client", "Delete", "Update"];
 
   // customerInformation Container
@@ -47,6 +47,7 @@ export default function BasicModal() {
       information
     );
     console.log(data);
+
     handleClose();
     setInformation({
       client_type: "Individual",
@@ -61,6 +62,8 @@ export default function BasicModal() {
       car_plateNumber: "",
     });
   };
+
+  console.log()
 
   return (
     <div>
