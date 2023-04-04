@@ -11,9 +11,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import axios from "axios";
 //zustand
-import { useStore } from "zustand";
 import useAddClient from "../../hooks/client/useAddClient";
 
 export default function BasicModal({ modalSelection, setModalSelection }) {
@@ -49,7 +47,6 @@ export default function BasicModal({ modalSelection, setModalSelection }) {
     //   information
     // );
     addClient(information);
-
     handleClose();
     setInformation({
       client_type: "Individual",
