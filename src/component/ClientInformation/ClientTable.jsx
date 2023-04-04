@@ -11,27 +11,21 @@ import {
 
 import axios from "axios";
 import CarInformationModal from "./CarInformationModal";
+import useGetClient from "../../hooks/client/useGetClient";
 
 export default function ClientTable({ modalSelection }) {
-  const [clients, setClients] = useState([]);
-  useEffect(() => {
-    const data = async () => {
-      const info = await axios.get("https://wellmed.onrender.com/api/clients");
-      setClients(info.data);
-      console.log(info.data);
-    };
-    data();
-  }, [modalSelection]);
+  const { data: clients, isLoading } = useGetClient();
 
-  console.log(clients);
+  if (isLoading) {
+    return <p>Loading....</p>;
+  }
 
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{ minWidth: 650 }}
-        aria-label="simple table"
-        className="overscroll-y-auto"
-      >
+    <TableContainer
+      component={Paper}
+      className="max-h-[700px] max-w-[1000px] overflow-y-auto"
+    >
+      <Table aria-label="simple table" className=" max-w-[650em] ">
         <TableHead>
           <TableRow>
             <TableCell>Client Type</TableCell>
@@ -53,7 +47,9 @@ export default function ClientTable({ modalSelection }) {
               <TableCell align="right">{client.client_name}</TableCell>
               <TableCell align="right">{client.client_address}</TableCell>
               <TableCell align="right">{client.client_phoneNumber}</TableCell>
-              <CarInformationModal carInfo={client} />
+              <TableCell align="right">
+                <CarInformationModal carInfo={client} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

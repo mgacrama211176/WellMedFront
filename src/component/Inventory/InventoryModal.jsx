@@ -10,27 +10,43 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import useAddItem from "../../hooks/InventoryHooks/useAddItem";
+import { LoadingButton } from "@mui/lab";
 
 export default function InventoryModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [modalSelection, setModalSelection] = useState("");
-  console.log(modalSelection);
-
   const functionalities = ["Add Item", "Delete", "Update"];
+  const { mutate: addItem, isloading } = useAddItem();
+
+  const [items, setItems] = useState({
+    item_name: "",
+    quantity: "",
+    base_price: "",
+    markup_price: "",
+    reOrder_price: "",
+  });
+
+  const handleChangeInput = (e) => {
+    const newItem = { ...items };
+    newItem[e.target.name] = e.target.value;
+    console.log(newItem);
+    setItems(newItem);
+  };
+
+  // const handleSubmit = async () => {
+  //   await addItem(items);
+  //   setItems({
+  //     item_name: "",
+  //     quantity: "",
+  //     base_price: "",
+  //     markup_price: "",
+  //     reOrder_price: "",
+  //   });
+  // };
+
   return (
     <div>
       <div>
@@ -58,40 +74,61 @@ export default function InventoryModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h5" component="h2">
                 Add Item
               </Typography>
               <Box className="flex flex-col gap-5">
-                <TextField label="Item Name" id="item_name" required />
+                <TextField
+                  label="Item Name"
+                  name="item_name"
+                  onChange={(e) => handleChangeInput(e)}
+                  required
+                />
                 <div className="flex flex-wrap justify-center gap-4">
                   <TextField
                     label="Quantity"
-                    id="quantity"
+                    name="quantity"
                     type="number"
+                    onChange={(e) => handleChangeInput(e)}
                     required
                   />
-                  <TextField label="Price" id="price" type="number" required />
+                  <TextField
+                    label="Price"
+                    name="price"
+                    type="number"
+                    onChange={(e) => handleChangeInput(e)}
+                    required
+                  />
                   <TextField
                     label="Base Price"
-                    id="base_price"
+                    name="base_price"
                     type="number"
+                    onChange={(e) => handleChangeInput(e)}
                     required
                   />
                   <TextField
                     label="Markup Price"
-                    id="markup_price"
+                    name="markup_price"
                     type="number"
+                    onChange={(e) => handleChangeInput(e)}
                     required
                   />
                   <TextField
                     label="Re-order Price"
-                    id="reOrder_price"
+                    name="reOrder_price"
                     type="number"
+                    onChange={(e) => handleChangeInput(e)}
                     required
                   />
                 </div>
-                <Button variant="contained">Submit</Button>
+                <LoadingButton
+                  variant="contained"
+                  // onClick={handleSubmit()}
+                  loading={isloading}
+                >
+                  Submit
+                </LoadingButton>
               </Box>
             </Box>
           </Modal>
@@ -104,7 +141,7 @@ export default function InventoryModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Delete Item
               </Typography>
@@ -122,7 +159,7 @@ export default function InventoryModal() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[500px] border-2 border-black p-4 shadow-md bg-white rounded-md">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Update Item
               </Typography>
