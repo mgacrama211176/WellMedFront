@@ -6,14 +6,10 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import AddClientModal from "./AddClientModal";
+import { AddClientModal } from "./ClientModal";
 import ClientTable from "./ClientTable";
-import styled from "styled-components";
 
 const AddClient = () => {
-  const productUrl = "https://wellmed.onrender.com/product/add";
-  const [modalSelection, setModalSelection] = useState("");
-
   const notify = () => {
     toast.success(`Added: ${products.ProductName}`, {
       position: "top-right",
@@ -44,10 +40,7 @@ const AddClient = () => {
           Add Client Information
         </h1>
         <div className="flex justify-center items-center  flex-col">
-          <AddClientModal
-            modalSelection={modalSelection}
-            setModalSelection={setModalSelection}
-          />
+          <AddClientModal />
           <ClientTable />
         </div>
       </div>

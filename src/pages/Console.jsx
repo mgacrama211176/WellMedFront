@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import AddClient from "../component/ClientInformation/AddClient";
 import Inventory from "../component/Inventory/Inventory";
 import Cars from "../component/Cars/Cars";
+import Dashboard from "../component/Dashboard/Dashboard";
 
 const Console = () => {
   const options = [
+    "Dashboard",
     "Client Information",
     "Inventory",
     "Job Card Generator",
@@ -18,7 +20,7 @@ const Console = () => {
     "Cars",
   ];
 
-  const [option, setOption] = useState("Client Information");
+  const [option, setOption] = useState("Dashboard");
 
   const [formHidden, setFormHidden] = useState({
     addItems: "none",
@@ -37,8 +39,6 @@ const Console = () => {
     setFormHidden;
     Protected();
   }, [formHidden]);
-
-  console.log(getSessionUser);
 
   const Protected = () => {
     if (getSessionUser) {
@@ -72,6 +72,8 @@ const Console = () => {
           <Inventory />
         ) : option === "Cars" ? (
           <Cars />
+        ) : option === "Dashboard" ? (
+          <Dashboard />
         ) : (
           <></>
         )}

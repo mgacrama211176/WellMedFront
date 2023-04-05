@@ -1,11 +1,11 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { addClientApi } from "../../api/ClientApi/addClientApi";
+import { updateClientApi } from "../../api/ClientApi/updateClientApi copy";
 
-const useAddClient = () => {
+const useUpdateClient = () => {
   const queryClient = useQueryClient();
 
   const clientMutation = useMutation({
-    mutationFn: addClientApi,
+    mutationFn: updateClientApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clients"] });
     },
@@ -14,4 +14,4 @@ const useAddClient = () => {
   return clientMutation;
 };
 
-export default useAddClient;
+export default useUpdateClient;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+//MUI
 import {
   Table,
   TableBody,
@@ -7,18 +7,31 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Tooltip,
 } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import BuildIcon from "@mui/icons-material/Build";
 
-import axios from "axios";
-import CarInformationModal from "./CarInformationModal";
+//custom Hook
+import useDeleteClient from "../../hooks/client/useDeleteClient";
 import useGetClient from "../../hooks/client/useGetClient";
 
-export default function ClientTable({ modalSelection }) {
+//components
+import CarInformationModal from "./CarInformationModal";
+import { UpdateClientModal } from "./ClientModal";
+
+export default function ClientTable() {
+  const { mutate: DeleteClient } = useDeleteClient();
   const { data: clients, isLoading } = useGetClient();
 
   if (isLoading) {
     return <p>Loading....</p>;
   }
+
+  const DeleteHandler = (id) => {
+    DeleteClient(id);
+    console.log(id);
+  };
 
   return (
     <TableContainer
@@ -33,6 +46,7 @@ export default function ClientTable({ modalSelection }) {
             <TableCell align="right">Client Address</TableCell>
             <TableCell align="right">Client Phone Number</TableCell>
             <TableCell align="right">Client Car Information</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -49,6 +63,16 @@ export default function ClientTable({ modalSelection }) {
               <TableCell align="right">{client.client_phoneNumber}</TableCell>
               <TableCell align="right">
                 <CarInformationModal carInfo={client} />
+              </TableCell>
+              <TableCell align="right">
+                <div className="flex gap-4 cursor-pointer">
+                  <Tooltip title="Delete">
+                    <DeleteForeverIcon
+                      onClick={() => DeleteHandler(client._id)}
+                    />
+                  </Tooltip>
+                  <UpdateClientModal client={client} />
+                </div>
               </TableCell>
             </TableRow>
           ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getClientApi } from "../../api/getClientApi";
+import { getClientApi } from "../../api/ClientApi/getClientApi";
 
 const useGetClient = () => {
   const clientQuery = useQuery({

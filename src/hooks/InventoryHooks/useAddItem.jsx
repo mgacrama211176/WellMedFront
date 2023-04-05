@@ -1,6 +1,5 @@
-import React from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { addItemApi } from "../../api/InventoryApi/InventoryApi";
+import { addItemApi } from "../../api/InventoryApi/AddItemApi";
 
 const useAddClient = () => {
   const queryClient = useQueryClient();
