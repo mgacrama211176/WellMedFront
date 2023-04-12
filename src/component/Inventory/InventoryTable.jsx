@@ -1,13 +1,19 @@
 import { useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  Tooltip,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+
 import { LoadingButton } from "@mui/lab";
 import useGetItem from "../../hooks/InventoryHooks/useGetItem";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import BuildIcon from "@mui/icons-material/Build";
 
 export default function InventoryTable() {
   const { data: items, isLoading } = useGetItem();
@@ -29,6 +35,7 @@ export default function InventoryTable() {
             <TableCell align="right">Mark up Price</TableCell>
             <TableCell align="right">quantity</TableCell>
             <TableCell align="right">Re-order price</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,6 +49,13 @@ export default function InventoryTable() {
               <TableCell align="right">{item.markup_price}</TableCell>
               <TableCell align="right">{item.quantity}</TableCell>
               <TableCell align="right">{item.reOrder_price}</TableCell>
+              <TableCell align="right">
+                <div className="flex gap-4 cursor-pointer">
+                  <Tooltip title="Delete">
+                    <DeleteForeverIcon onClick={() => console.log(item)} />
+                  </Tooltip>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

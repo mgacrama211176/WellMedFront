@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.jpg";
-import "../styles/home.css";
+import { useNavigate, Link } from "react-router-dom";
+import Logo from "../../assets/logo.jpg";
+import "../../styles/home.css";
 
 //MUI components
 import Button from "@mui/material/Button";
@@ -13,8 +13,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //icons
-import facebook from "../assets/icons/facebook.png";
-import map from "../assets/icons/map.png";
+import facebook from "../../assets/icons/facebook.png";
+import map from "../../assets/icons/map.png";
 
 const Home = () => {
   const url = "https://wellmed.onrender.com/login";
@@ -114,69 +114,9 @@ const Home = () => {
       <div className="mainContainer">
         <img src={Logo} alt="logo" />
       </div>
-      <div className="searchBar">
-        <input
-          type="search"
-          name="search"
-          id="search"
-          placeholder="Search Product"
-          onChange={(e) => searchBarChange(e)}
-          value={search.search}
-        />
-        <button onClick={getProduct}>Search</button>
-      </div>
-      <div className="tableContainer">
-        <table className="searchProductContainer">
-          <thead>
-            <tr>
-              <th>PRODUCT</th>
-              <th>BRAND</th>
-              <th>UNIT</th>
-              <th>PRICE</th>
-            </tr>
-          </thead>
-          {resultProducts.map((result) => (
-            <tr key={result._id}>
-              <td>{result.product}</td>
-              <td>{result.brand}</td>
-              <td>{result.unit}</td>
-              <td>{result.price}</td>
-            </tr>
-          ))}
-        </table>
-      </div>
-      <div className="login">
-        <Button onClick={handleOpen}>Login</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <form onSubmit={(e) => authAcountAndRedirect(e)}>
-            <div className="inputContainer">
-              <input
-                type="text"
-                placeholder="username"
-                id="username"
-                onChange={(e) => onChangeHandle(e)}
-                value={login.username}
-                required
-              />
-              <input
-                type="password"
-                placeholder="password"
-                id="password"
-                onChange={(e) => onChangeHandle(e)}
-                value={login.password}
-                required
-              />
-              <button type="submit" id="submit">
-                Submit
-              </button>
-            </div>
-          </form>
-        </Modal>
+
+      <div className="cursor-pointer absolute top-8 right-8 p-2 font-extrabold hover:bg-black hover:text-white border-transparent rounded transition duration-500 ease-in-out">
+        <Link to={"/login"}>Login</Link>
       </div>
 
       <div className="linkIcons">

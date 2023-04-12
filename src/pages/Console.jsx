@@ -18,6 +18,7 @@ const Console = () => {
     "Accounting",
     "Suppliers",
     "Cars",
+    "Add employee",
   ];
 
   const [option, setOption] = useState("Dashboard");
