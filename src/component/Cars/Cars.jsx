@@ -5,7 +5,7 @@ const Cars = () => {
 };
 
 export default Cars;
-
+// sample comment
 /*
 Cars
 o Cars Database
